@@ -73,5 +73,12 @@ func getDisplay() []display {
 
 func Status() {
 	displays := getDisplay()
-	fmt.Println(displays)
+	for _, display := range displays {
+		status := "\x1b[31m x \x1b[0m"
+		if display.isConnected {
+			status = "\x1b[32m o \x1b[0m"
+		}
+		msg := display.name + "\t[" + status + "]"
+		fmt.Println(msg)
+	}
 }
