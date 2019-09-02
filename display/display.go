@@ -8,6 +8,13 @@ import (
 	"strings"
 )
 
+type display struct {
+	name        string
+	sizes       []string
+	isConnected bool
+	isPrimary   bool
+}
+
 func getDisplay() []display {
 	out, err := exec.Command("xrandr").Output()
 	if err != nil {
