@@ -30,6 +30,13 @@ func getDisplayInfo(line string) display {
 	return dp
 }
 
+func getDisplaySize(line string) string {
+	rep := regexp.MustCompile(`\d+x\d+i?`)
+	size := rep.FindAllStringSubmatch(line, -1)
+
+	return size[0][0]
+}
+
 func getDisplay() []display {
 	out, err := exec.Command("xrandr").Output()
 	if err != nil {
