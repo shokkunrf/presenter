@@ -82,3 +82,20 @@ func Status() {
 		fmt.Println(msg)
 	}
 }
+
+func Mirroring() {
+	displays := getDisplay()
+	primary := display{}
+	for _, display := range displays {
+		if display.isPrimary == true {
+			primary = display
+		}
+	}
+
+	for _, display := range displays {
+		if display.isPrimary == true {
+			continue
+		}
+		exec.Command("xrandr --output " + display.name + " --same-as " + primary.name)
+	}
+}
