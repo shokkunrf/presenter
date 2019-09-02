@@ -15,6 +15,21 @@ type display struct {
 	isPrimary   bool
 }
 
+func getDisplayInfo(line string) display {
+	dp := display{}
+
+	words := strings.Split(line, " ")
+	dp.name = words[0]
+
+	if words[1] == "connected" {
+		dp.isConnected = true
+		if words[2] == "primary" {
+			dp.isPrimary = true
+		}
+	}
+	return dp
+}
+
 func getDisplay() []display {
 	out, err := exec.Command("xrandr").Output()
 	if err != nil {
